@@ -1,4 +1,4 @@
-package com.jdluke.SLAMonitor;
+package com.jdluke.sla_monitor;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
