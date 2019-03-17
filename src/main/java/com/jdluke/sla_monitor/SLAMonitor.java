@@ -1,6 +1,9 @@
 package com.jdluke.sla_monitor;
 
+import com.jdluke.sla_monitor.exceptions.InvalidMethodException;
+import com.jdluke.sla_monitor.exceptions.SLAViolationException;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -48,7 +51,7 @@ public class SLAMonitor {
         if (duration > metered.millisecondsBeforeError()) {
             logger.error(slaMarker, "SLA Violation calling {}.  Actual response time of {} exceeded threshold of {}", name, duration, metered.millisecondsBeforeError());
             if (metered.throwExceptionOnViolation()) {
-                throw new SlaViolationException(name, metered.millisecondsBeforeError(), duration);
+                throw new SLAViolationException(name, metered.millisecondsBeforeError(), duration);
             }
         } else {
             if (metered.millisecondsBeforeWarning() > 0) {
