@@ -14,5 +14,7 @@ include 'shared'
 include 'api'
 */
 include 'components:sla-monitor'
+include 'applications:monitored-app'
 
 rootProject.name = 'SLAMonitor'
+

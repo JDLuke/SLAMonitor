@@ -11,6 +11,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SLAMonitor.main" target="1.8" />
+      <module name="SLAMonitor.monitored-app.main" target="1.8" />
+      <module name="SLAMonitor.monitored-app.test" target="1.8" />
       <module name="SLAMonitor.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
