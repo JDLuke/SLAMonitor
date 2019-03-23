@@ -9,6 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class SLAConfiguration {
     @Bean
     public Marker getSlaMarker() {
-        return MarkerFactory.getMarker("SLA Monitor");
+        return MarkerFactory.getMarker("SLAMonitor");
     }
 }
