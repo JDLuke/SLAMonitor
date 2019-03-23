@@ -2,6 +2,7 @@ package com.jdluke.sla_monitor;
 
 import com.jdluke.sla_monitor.exceptions.InvalidMethodException;
 import com.jdluke.sla_monitor.exceptions.SLAViolationException;
+import com.jdluke.sla_monitor.sla.SLA;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -30,14 +31,14 @@ public class SLAMonitor {
 
     static final Logger logger = LoggerFactory.getLogger(SLAMonitor.class.getName());
 
-    @Around("@annotation(Metered)")
+    @Around("@annotation(com.jdluke.sla_monitor.sla.SLA)")
     public Object aroundWebController(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        Metered metered = extractAnnotatedMethod(proceedingJoinPoint).getAnnotation(Metered.class);
+        SLA SLA = extractAnnotatedMethod(proceedingJoinPoint).getAnnotation(SLA.class);
         String name = proceedingJoinPoint.getSignature().getName();
 
-        logger.debug("SLA: {} milliseconds before error.", metered.millisecondsBeforeError());
-        if (metered.millisecondsBeforeWarning() > -1) {
-            logger.debug("Allowing {} milliseconds before warning.", metered.millisecondsBeforeWarning());
+        logger.debug("SLA: {} milliseconds before error.", SLA.millisecondsBeforeError());
+        if (SLA.millisecondsBeforeWarning() > -1) {
+            logger.debug("Allowing {} milliseconds before warning.", SLA.millisecondsBeforeWarning());
         }
 
         long start = System.currentTimeMillis();
@@ -51,15 +52,15 @@ public class SLAMonitor {
         long end = System.currentTimeMillis();
 
         long duration = end - start;
-        if (duration > metered.millisecondsBeforeError()) {
-            logger.error(slaMarker, "SLA Violation calling {}.  Actual response time of {} exceeded threshold of {}", name, duration, metered.millisecondsBeforeError());
-            if (metered.throwExceptionOnViolation()) {
-                throw new SLAViolationException(name, metered.millisecondsBeforeError(), duration);
+        if (duration > SLA.millisecondsBeforeError()) {
+            logger.error(slaMarker, "SLA Violation calling {}.  Actual response time of {} exceeded threshold of {}", name, duration, SLA.millisecondsBeforeError());
+            if (SLA.throwExceptionOnViolation()) {
+                throw new SLAViolationException(name, SLA.millisecondsBeforeError(), duration);
             }
         } else {
-            if (metered.millisecondsBeforeWarning() > 0) {
-                if (end - start > metered.millisecondsBeforeWarning()) {
-                    logger.warn(slaMarker, "SLA Warning calling {}.  Actual response time of {} exceeded threshold of {}", name, duration, metered.millisecondsBeforeWarning());
+            if (SLA.millisecondsBeforeWarning() > 0) {
+                if (end - start > SLA.millisecondsBeforeWarning()) {
+                    logger.warn(slaMarker, "SLA Warning calling {}.  Actual response time of {} exceeded threshold of {}", name, duration, SLA.millisecondsBeforeWarning());
                 }
             }
         }

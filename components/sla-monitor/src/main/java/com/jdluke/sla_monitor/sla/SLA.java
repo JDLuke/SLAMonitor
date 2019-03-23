@@ -1,4 +1,4 @@
-package com.jdluke.sla_monitor;
+package com.jdluke.sla_monitor.sla;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,7 +20,7 @@ import java.lang.annotation.RetentionPolicy;
  *
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Metered {
+public @interface SLA {
     long millisecondsBeforeWarning() default  -1l;
     long millisecondsBeforeError() default  5000l;
     boolean throwExceptionOnViolation() default false;
