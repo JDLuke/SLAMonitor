@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
+//import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -76,9 +77,9 @@ public class SLAMonitor {
         Method m = null;//c.getMethod(name, proceedingJoinPoint.getArgs());
         Method[] methods = c.getMethods();
 
-        for (Method meth : methods) {
-            if (meth.getName().equals(name)) {
-                return meth;
+        for (Method method : methods) {
+            if (method.getName().equals(name)) {
+                return method;
             }
         }
         throw new InvalidMethodException();
