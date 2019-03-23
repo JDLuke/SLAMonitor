@@ -3,7 +3,7 @@ apply from: '../../java.gradle'
 group = "com.jdluke"
 version = "1.0.1-SNAPSHOT"
 
-apply plugin: "io.spring"
+apply plugin: "org.springframework.boot"
 //apply plugin: "io.spring.dependency-management"
 
 //description = "SLA Monitor :: Core Functionality :: Implementation"
