@@ -1,9 +1,9 @@
-apply from: '../../java.gradle'
+apply from: "../../java.gradle"
 
 group = "com.jdluke"
-version = "1.0.1-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 
-apply plugin: "org.springframework.boot"
+//apply plugin: "org.springframework.spring-boot"
 //apply plugin: "io.spring.dependency-management"
 
 //description = "SLA Monitor :: Core Functionality :: Implementation"
