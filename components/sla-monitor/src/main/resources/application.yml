@@ -1,5 +1,1 @@
 spring:
-logging:
-  level:
-    ROOT: OFF
-    com.jdluke: DEBUG

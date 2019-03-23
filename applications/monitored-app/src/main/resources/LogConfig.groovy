@@ -2,7 +2,9 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder
 import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.FileAppender
 
+import static ch.qos.logback.classic.Level.ALL
 import static ch.qos.logback.classic.Level.DEBUG
+import static ch.qos.logback.classic.Level.INFO
 
 appender("STDOUT", ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
@@ -16,6 +18,6 @@ appender("FILEOUT", FileAppender) {
     }
 }
 logger("com.jdluke.sla_monitor", DEBUG)
-
+logger("SLAMonitor", ALL)
 root(DEBUG, ["STDOUT"])
 root(DEBUG, ["FILEOUT"])
