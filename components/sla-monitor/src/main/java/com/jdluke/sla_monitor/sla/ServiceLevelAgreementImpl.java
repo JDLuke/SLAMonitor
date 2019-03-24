@@ -1,8 +1,7 @@
-package com.jdluke.sla_monitor;
+package com.jdluke.sla_monitor.sla;
 
 import com.jdluke.sla_monitor.exceptions.InvalidMethodException;
 import com.jdluke.sla_monitor.exceptions.SLAViolationException;
-import com.jdluke.sla_monitor.sla.SLA;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -21,18 +20,19 @@ import java.lang.reflect.Method;
 @Configuration
 @ComponentScan("com.jdluke.sla_monitor")
 @Aspect
-public class SLAMonitor {
+public class ServiceLevelAgreementImpl {
 
     private final Marker slaMarker;
 
-    public SLAMonitor(Marker slaMarker) {
+    public ServiceLevelAgreementImpl(Marker slaMarker) {
         this.slaMarker = slaMarker;
     }
 
-    static final Logger logger = LoggerFactory.getLogger(SLAMonitor.class.getName());
+    static final Logger logger = LoggerFactory.getLogger(ServiceLevelAgreementImpl.class.getName());
 
     @Around("@annotation(com.jdluke.sla_monitor.sla.SLA)")
     public Object aroundWebController(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        System.out.println("Proof.");
         SLA SLA = extractAnnotatedMethod(proceedingJoinPoint).getAnnotation(SLA.class);
         String name = proceedingJoinPoint.getSignature().getName();
 
